@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+
+# Docker
+*.log
+*.pid
+*.sock
+*.db
+docker-compose.override.yml
+
+# Client build
+client/build/
+client/.next/
+
+# OS
+.DS_Store
+Thumbs.db
