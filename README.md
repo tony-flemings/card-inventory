@@ -34,3 +34,43 @@ To spin up the environment:
 
 ```bash
 docker-compose up --build
+
+🗂️ Project Structure
+├── server/
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   ├── middleware/
+│   ├── uploads/
+│   └── app.js
+├── client/ (optional frontend)
+├── docker-compose.yml
+├── .env
+└── README.md
+
+
+
+🛡️ Security & Best Practices
+- Environment variables stored in .env
+- SQL injection prevention via parameterized queries
+- Uploaded files stored securely with MIME type checks
+- .sql backups excluded from Git history and .gitignored
+
+📈 Roadmap
+- 🔄 Add login and session management
+- 🛒 Implement card trading and marketplace features
+- 📦 Integrate external APIs (e.g., PriceCharting, SerpAPI)
+- 🧠 Add AI-powered card valuation (future)
+
+🤝 Contributing
+Pull requests welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+📄 License
+MIT
+
+👤 Author
+Tony Flemings
+Senior Enterprise Architecture & Data Strategy Professional
+LinkedIn | GitHub
+
+---
