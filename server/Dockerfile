@@ -1,18 +1,11 @@
-# Use official Node.js image
-FROM node:22.2.0
+# server/Dockerfile
 
-# Set working directory
+FROM node:20
+
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the rest of the app
 COPY . .
 
-# Expose the port your app runs on
-EXPOSE 5000
+RUN chmod +x wait-for-it.sh
 
-# Start the server
-CMD ["npm", "start"]
+CMD ["./wait-for-it.sh", "db:3306", "--", "node", "server.js"]
