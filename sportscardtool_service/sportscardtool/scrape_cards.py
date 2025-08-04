@@ -1,7 +1,7 @@
 # scrape_cards.py
 
 import argparse
-from scraping_tool import run_scraper  # Or from scraper.utils.safe_tcdb import scrape_tcdb
+from .scraping_tool import run_scraper  # Or from scraper.utils.safe_tcdb import scrape_tcdb
 
 def main():
     parser = argparse.ArgumentParser(

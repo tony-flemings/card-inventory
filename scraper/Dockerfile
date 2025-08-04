@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+RUN apt update && apt install -y git
+
 ENV PYTHONPATH="/usr/bin/git:${PYTHONPATH}"
 
 WORKDIR /app

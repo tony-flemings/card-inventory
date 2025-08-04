@@ -1,11 +1,11 @@
 {
-  "name": "ci-cards-server",
+  "name": "ci-docker-server",
   "version": "1.0.0",
   "description": "Backend server for CI Cards marketplace",
   "license": "MIT",
   "author": "Tony",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"

@@ -18,3 +18,7 @@ def grab_year_links(base_url):
         {"year": "1990", "url": f"{base_url}/1990"},
         {"year": "1991", "url": f"{base_url}/1991"}
     ]
+
+def run_scraper(source: str, limit: int = 50, dry_run: bool = False):
+    print(f"🟢 Starting scrape from {source} (limit: {limit}, dry-run: {dry_run})")
+    # Your scraping logic here
