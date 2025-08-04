@@ -3,8 +3,10 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the inner package and setup.py
-COPY SportsCardTool/SportsCardTool /app/SportsCardTool
+COPY SportsCardTool/SportsCardTool /app/SportsCardTool/SportsCardTool
 COPY setup.py /app/
+
+ENV PYTHONPATH=/app/scraper
 
 # Install the package
 RUN pip install -e .

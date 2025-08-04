@@ -2,14 +2,24 @@
 
 FROM python:3.11-slim
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
-# Copy everything from your project into the container
-COPY . .
+# Install system dependencies including Git
+RUN apt-get update && \
+    apt-get install -y git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install dependencies listed in scraper/requirements.txt
-RUN pip install --no-cache-dir -r scraper/requirements.txt
+# Copy your scraper code
+COPY scraper/ /app/
+COPY SportsCardTool/ /app/SportsCardTool/
 
-# Run the scraper script
-CMD ["python", "app/SportsCardTool/SportsCardTool/scrape_cards.py"]
+#Set PYTHONPATH so Python can find scraper/utils
+ENV PYTHONPATH=/app/scraper
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run the scraper
+CMD ["python", "SportsCardTool/SportsCardTool/scrape_cards.py"]
