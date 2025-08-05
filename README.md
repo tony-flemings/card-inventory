@@ -1,12 +1,12 @@
 # 🃏 Trading Card Marketplace
 
-A full-stack web application for buying, selling, and showcasing collectible trading cards. Built with Node.js, Express, MySQL, and Docker Compose, this project features secure user registration, image uploads, and a scalable backend architecture.
+A full-stack web application for buying, selling, and showcasing collectible trading cards. Built with Node.js, Express, MySQL, and Docker Compose, this project features secure user registration, image uploads, and a scalable backend architecture. As a card trader I grow increasingly frustrated with platforms claiming more of the profit YoY. This is my answer to the problem, since they refuse to address it.
 
 ---
 
 ## 🚀 Features
 
-- 🔐 **User Registration**: Secure signup with frontend validation and hashed password storage
+- 🔐 **User Registration**: Secure signup with frontend validation and OTP's
 - 🖼️ **Image Uploads**: Upload card images using Multer and store metadata in MySQL
 - 📊 **Database Integration**: Relational schema optimized for performance and scalability
 - 🧱 **Dockerized Setup**: Multi-container environment with Node.js, MySQL, and phpMyAdmin
