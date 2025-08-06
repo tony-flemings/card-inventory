@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+require('./validate_env');
 
 const db = require('./db'); // Modular DB connection
 
