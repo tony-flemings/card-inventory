@@ -18,4 +18,4 @@ client/.next/
 # OS
 .DS_Store
 Thumbs.db
-
+venv/

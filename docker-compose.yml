@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   client:
     build:
@@ -31,6 +29,7 @@ services:
       - DB_USER=${DOCKER_USER}
       - DB_PASSWORD=${DOCKER_PASS}
       - DB_NAME=${MYSQL_DATABASE}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
 
     networks:
       - cardnet
