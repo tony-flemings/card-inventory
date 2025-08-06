@@ -1,0 +1,15 @@
+# Core framework
+Flask==3.0.2
+
+# SportsCardTool (local + Git version)
+SportsCardTool==0.2.4
+git+https://github.com/TravisGibbs/SportsCardToolLib.git@v0.2.4
+
+# API integrations
+requests==2.31.0  # Used by SerpAPI and PriceCharting wrappers
+
+# Utilities
+mysql-connector-python==8.3.0
+
+# Environment variable handling
+python-dotenv==1.0.1

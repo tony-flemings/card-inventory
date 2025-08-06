@@ -1,0 +1,103 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: ${CLIENT_NAME}
+    working_dir: /app/client_dist
+    ports:
+      - "3000:3000"
+    command: ["serve", "-s", ".", "-l", "3000"]
+    depends_on:
+      - server
+    networks:
+      - cardnet
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: ${SERVER_NAME}
+    working_dir: /app
+    ports:
+      - "5000:5000"
+    command: ["node", "server.js"]
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DOCKER_USER}
+      - DB_PASSWORD=${DOCKER_PASS}
+      - DB_NAME=${MYSQL_DATABASE}
+
+    networks:
+      - cardnet
+
+  scraper:
+    build:
+      context: ./scraper
+      dockerfile: Dockerfile
+    container_name: ${SCRAPER_NAME}
+    working_dir: /app/scraper
+    command: ["python", "main.py"]
+    volumes:
+      - ./scraper/data:/app/scraper/data
+      - ./scraper/logs:/app/scraper/logs
+    depends_on:
+      - db
+    networks:
+      - cardnet
+
+  sportscardtool_service:
+    build:
+      context: ./sportscardtool_service
+      dockerfile: Dockerfile
+    container_name: ${SERVICE_NAME}
+    working_dir: /app/sportscardtool
+    command: ["python", "run.py", "--source", "tcdb", "--limit", "10", "--dry-run"]
+    depends_on:
+      - scraper
+    networks:
+      - cardnet
+
+  db:
+    image: mysql:8.0
+    container_name: ${DB_NAME}
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - cardnet
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${PHPMYADMIN_NAME}
+    restart: always
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - cardnet
+
+volumes:
+  db_data:
+
+networks:
+  cardnet:
+    driver: bridge

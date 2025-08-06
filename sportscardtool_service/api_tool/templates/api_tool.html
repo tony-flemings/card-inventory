@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sports Card Search</title>
+</head>
+<body>
+    <h1>Search for a Card</h1>
+    <form method="POST">
+        <input type="text" name="query" placeholder="Enter card name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Results:</h2>
+        <ul>
+        {% for r in results %}
+            <li><strong>{{ r.title }}</strong><br>{{ r.link }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

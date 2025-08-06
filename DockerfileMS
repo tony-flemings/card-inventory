@@ -1,0 +1,53 @@
+# Stage 1: Base setup with shared requirements
+FROM python:3.11-slim AS base
+WORKDIR /base
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Stage 2: Build client
+FROM node:22.18.0 AS client
+WORKDIR /client
+COPY client/package*.json ./
+RUN npm install
+COPY client/ .
+RUN npm run build
+
+# Stage 3: Prepare server
+FROM node:22.18.0 AS server
+WORKDIR /server
+COPY server/package*.json ./
+RUN npm install
+COPY server/ .
+
+# Stage 4: Prepare scraper
+FROM python:3.11-slim AS scraper
+WORKDIR /scraper
+RUN apt-get update && apt-get install -y git
+COPY sportscardtool_requirements.txt .
+RUN pip install --no-cache-dir -r sportscardtool_requirements.txt
+COPY scraper/ .
+
+# Stage 5: Prepare sportscardtool_service
+FROM python:3.11-slim AS sportscardtool
+WORKDIR /sportscardtool
+RUN apt-get update && apt-get install -y git
+COPY sportscardtool_requirements.txt .
+RUN pip install --no-cache-dir -r sportscardtool_requirements.txt
+COPY sportscardtool_service/ .
+
+# Final Stage: Runtime container
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=client /client/dist ./client_dist
+COPY --from=server /server ./server
+COPY --from=scraper /scraper ./scraper
+COPY --from=sportscardtool /sportscardtool ./sportscardtool
+COPY --from=base /base/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Default command (can be overridden in Compose)
+CMD ["python", "scraper/main.py"]
+
+
+
