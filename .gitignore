@@ -9,6 +9,7 @@ npm-debug.log*
 *.sock
 *.db
 docker-compose.override.yml
+server/.dockerignore
 
 # Client build
 client/build/
@@ -17,4 +18,4 @@ client/.next/
 # OS
 .DS_Store
 Thumbs.db
-docker-compose.yml
+
