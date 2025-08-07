@@ -1,30 +1,35 @@
 // Load environment variables early
 require('dotenv').config();
-require('/app/db.js');
-require('./DatabaseConnection');
-import DatabaseConnection from './db.js';
+require('/app/config/database.js');
+const DatabaseConnection = require('./config/DatabaseConnection');
+
 
 // Core modules
 const express = require('express');
 const cors = require('cors');
 
 // Internal modules
-let db = new DatabaseConnection(process.env.DB_HOST, process.env.DOCKER_USER, process.env.DOCKER_PASS, process.env.MYSQL_DATABASE);
-db.connect;
+const db = new DatabaseConnection({
+    host:process.env.DB_HOST, 
+    user:process.env.DB_USER, 
+    password:process.env.DB_PASSWORD, 
+    database:process.env.DB_NAME
+});
+db.connect();
 
 // const cardRoutes = require('./routes/cards'); // Uncomment when ready
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// 🛡️ Middleware
+/* 🛡️ Middleware
 app.use(cors());
 app.use(express.json());
 
-// 🔍 Health Check Routes
+ 🔍 Health Check Routes
 app.get('/', (_, res) => res.send('Server is running'));
 app.get('/api/health', (_, res) => res.json({ status: 'Server is running!' }));
-
+*/
 // 📦 API Routes
 // app.use('/api/cards', cardRoutes); // Future route integration
 
