@@ -1,6 +1,9 @@
 import os
 import click
 import requests
+import json
+from pathlib import Path
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,7 +15,8 @@ load_dotenv()
 @click.option("--sold", is_flag=True, help="Show only sold listings")
 @click.option("--buy-it-now", is_flag=True, help="Show only Buy It Now listings")
 @click.option("--verbose", is_flag=True, help="Print raw response for debugging")
-def search_ebay(query, category_id, limit, sold, buy_it_now, verbose):
+@click.option("--out", default=None, help="Save results to a JSON file")
+def search_ebay(query, category_id, limit, sold, buy_it_now, verbose, out):
     """Search eBay for trading cards using SerpApi."""
     api_key = os.getenv("SERPAPI_KEY")
     if not api_key:
@@ -56,3 +60,12 @@ def search_ebay(query, category_id, limit, sold, buy_it_now, verbose):
         price = item.get("price", "No price")
         link = item.get("link", "No link")
         click.echo(f"🃏 {title}\n💲 {price}\n🔗 {link}\n")
+
+    if out:
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+        filename = f"{out}_{timestamp}.json" if not out.endswith(".json") else out
+        out_path = Path("output") / filename
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(results, indent=2))
+        click.echo(f"✅ Saved {len(results)} results to {out_path.resolve()}")
+

@@ -12,10 +12,12 @@ npm-debug.log*
 *.db
 docker-compose.override.yml
 server/.dockerignore
+server/index.js.save
 
 # Client build
 client/build/
 client/.next/
+sportscardtool_service/api_tool/output/
 
 # OS
 .DS_Store
