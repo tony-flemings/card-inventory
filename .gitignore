@@ -2,7 +2,10 @@
 node_modules/
 .env
 .env_prod
+<<<<<<< HEAD
 .env_dev
+=======
+>>>>>>> 9d83fda (Cleanup yaml)
 npm-debug.log*
 
 # Docker
