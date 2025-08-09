@@ -8,6 +8,10 @@ const DatabaseConnection = require('./config/DatabaseConnection');
 const express = require('express');
 const cors = require('cors');
 
+require('dotenv').config();
+require('./validate_env');
+
+
 // Internal modules
 const db = new DatabaseConnection({
     host:process.env.DB_HOST, 
