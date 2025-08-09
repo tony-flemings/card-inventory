@@ -4,16 +4,9 @@ services:
       context: ./client
       dockerfile: Dockerfile
     container_name: ${CLIENT_CONTAINER_NAME}
-<<<<<<< HEAD
-
     env_file:
       - .env
-
-=======
->>>>>>> 9d83fda (Cleanup yaml)
     working_dir: /app/client_dist
-    env_file: 
-      - .env
     ports:
       - "3000:3000"
     command: ["serve", "-s", ".", "-l", "3000"]
@@ -27,17 +20,9 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: ${SERVER_CONTAINER_NAME}
-<<<<<<< HEAD
-
-
     env_file:
       - .env
-
-=======
->>>>>>> 9d83fda (Cleanup yaml)
     working_dir: /app
-    env_file:
-      - .env
     ports:
       - "5000:5000"
     command: ["node", "server.js"]
@@ -49,10 +34,6 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - MYSQL_DATABASE=${DB_NAME}
-<<<<<<< HEAD
-
-=======
->>>>>>> 9d83fda (Cleanup yaml)
 
     networks:
       - cardnet
@@ -62,14 +43,9 @@ services:
       context: ./scraper
       dockerfile: Dockerfile
     container_name: ${SCRAPER_CONTAINER_NAME}
-<<<<<<< HEAD
     env_file:
       - .env
-=======
->>>>>>> 9d83fda (Cleanup yaml)
     working_dir: /app/scraper
-    env_file:
-      - .env
     command: ["python", "main.py"]
     volumes:
       - ./scraper/data:/app/scraper/data
@@ -84,11 +60,6 @@ services:
       context: ./sportscardtool_service
       dockerfile: Dockerfile
     container_name: ${SERVICE_CONTAINER_NAME}
-<<<<<<< HEAD
-    env_file:
-      - .env
-=======
->>>>>>> 9d83fda (Cleanup yaml)
     working_dir: /app/sportscardtool
     env_file:
       - .env

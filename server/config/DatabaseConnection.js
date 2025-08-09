@@ -28,7 +28,7 @@ class DatabaseConnection {
       } catch (error) {
         this.tries--;
         console.warn(`❌ Connection failed. Retries left: ${this.tries}`);
-        console.log(error.prototype.name);
+        console.log(error.name);
         console.log(this);
         if (this.tries === 0) throw error;
         await new Promise(res => setTimeout(res, this.delay));
