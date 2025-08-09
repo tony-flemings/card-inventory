@@ -1,0 +1,34 @@
+.TH API_TOOL 1 "August 2025" "1.0" "API Tool Manual"
+.SH NAME
+api_tool \- CLI for trading card data, eBay search, and PriceCharting integration
+.SH SYNOPSIS
+.B api_tool
+[\fICOMMAND\fR] [\fIOPTIONS\fR]
+.SH DESCRIPTION
+api_tool is a modular CLI for fetching trading card data, searching eBay listings, and querying PriceCharting prices.
+
+.SH COMMANDS
+.TP
+.B fetch
+Fetch card data from your internal API.
+
+.TP
+.B search-ebay
+Search eBay listings using SerpApi.
+
+.TP
+.B pricechart
+Query PriceCharting for card prices by ID, UPC, or name.
+
+.SH OPTIONS
+Use \fB--help\fR with any command to see available flags.
+
+.SH EXAMPLES
+.B api_tool fetch --set=alpha --year=2022
+.br
+.B api_tool search-ebay --query="Jordan rookie" --sold
+.br
+.B api_tool pricechart --name="EarthBound"
+
+.SH AUTHOR
+Tony, 2025
