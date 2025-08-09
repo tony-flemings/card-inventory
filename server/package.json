@@ -4,7 +4,6 @@
   "description": "Backend server for CI Cards marketplace",
   "license": "MIT",
   "author": "Tony",
-  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node index.js",
